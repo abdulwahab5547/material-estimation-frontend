@@ -1,7 +1,12 @@
 import axios from "axios";
 
+// Base URL for the backend. Leave VITE_API_URL unset in dev so requests stay
+// same-origin and hit the Vite proxy (see vite.config.ts). In prod, set it to
+// the backend's origin (no trailing /api — call sites already include it).
+const baseURL = import.meta.env.VITE_API_URL ?? "/";
+
 export const api = axios.create({
-  baseURL: "/",
+  baseURL,
   withCredentials: true,
   headers: { "Content-Type": "application/json" },
 });
